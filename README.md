@@ -1,7 +1,11 @@
 # FSOD - File System of D state
 
-Simple file system to create uninterruptive sleep process (D state in Linux, U state in MacOS).
-This file system is created for the purpose of debugging and situation reproduction .
+Simple file system to create uninterruptive sleep process (`D` state in Linux, `U` state in MacOS).
+This file system is created for the purpose of debugging and reproduction.
+
+This software uses github.com/fusepy/fusepy, is created based on `memory.py` in fusepy example.
+
+The code is under ISC license.
 
 ## How to use
 
@@ -36,4 +40,4 @@ To recover from D state, please `kill -KILL` the `fsod.py` process.
 D state は NFS などのネットワークストレージを使っているとよく見るものですが、要するに `read(2)` 等をしている最中にカーネルモジュール側からの回答が返ってこなくなったときに起きます。
 ということは、 fuse で十分再現ができるんじゃないかなーということで作ってみた習作です。
 
-コンテナに D state になってほしい場合、ホスト側でこれを mount しておいて、コンテナに bind mount して中で触るのがよいかなと思います。
+コンテナ内のプロセスに D state になってほしい場合、ホスト側で fsod を mount しておいて、コンテナに bind mount して中で触るのがよいかなと思います。
