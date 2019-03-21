@@ -6,7 +6,7 @@ import logging
 from collections import defaultdict
 from errno import ENOENT
 from stat import S_IFDIR, S_IFLNK, S_IFREG
-from time import time
+from time import time, sleep
 
 from fuse import FUSE, FuseOSError, Operations, LoggingMixIn
 
@@ -80,6 +80,8 @@ class Memory(LoggingMixIn, Operations):
         self.files['/']['st_nlink'] += 1
 
     def open(self, path, flags):
+        while True:
+            sleep(1)
         self.fd += 1
         return self.fd
 
